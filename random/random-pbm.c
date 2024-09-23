@@ -27,6 +27,35 @@ static char **make_random_matrix(int m, int n, double f) {
     return M;
 }
 
+static void show_usage(char *progname)
+{
+	printf("Usage:   %s m n s f outfile\n", progname );
+	printf("\t writes an mxn random bitmap to a file named 'outfile'\n");
+	printf("\t f: fill ratio  0.0 <= f <= 1.0\n");
+	printf("\t s: integer >= 1: seeds the random number generator\n");
+
+
+}
+
+static int write_pbm(char **M, int m, int n, char *outfile)
+{
+	FILE *fptr;
+
+	if((fptr=freopen(outfile, "w" ,stdout))==NULL) {
+    		printf("Cannot open file.\n");
+    		exit(1);
+  	}
+	
+	printf("P1\n");
+	printf("%u %u\n", m, n);
+	print_matrix("%u", M, m, n);  	
+
+  	fclose(fptr);
+
+	return 0;
+
+}
+
 int main(int argc, char **argv) {
 
     int m, n, s;
@@ -55,7 +84,7 @@ int main(int argc, char **argv) {
     }
 
     s = strtol(argv[3], &endptr, 10);
-    if (*endptr != '\0' || s < 2) {
+    if (*endptr != '\0' || s < 1) {
         show_usage(argv[0]);
         return status;
     }

@@ -28,7 +28,7 @@
 #define print_vector(fmt, v, n) do {                                                        \
     size_t print_vector_ctr;                                                                \
     for (print_vector_ctr = 0; print_vector_ctr < n; print_vector_ctr++) {                  \
-        print(fmt, (v)[print_vector_ctr]);                                                  \
+        printf(fmt, (v)[print_vector_ctr]);                                                  \
     }                                                                                       \
     putchar('\n');                                                                          \
 } while(0)                                                                                      
